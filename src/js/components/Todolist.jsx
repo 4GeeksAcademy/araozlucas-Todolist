@@ -18,7 +18,7 @@ export const Todolist = () => {
 
     return (
         <div className="container text-start">
-            <h1 className="text-center mt-10 quicksand-light text-danger">todos</h1>
+            <h1 className="text-center mt-10 quicksand-light text-danger display-1">todos</h1>
             <div className="col-10 col-sm-8 col-md-6 col-lg-4 m-auto">
                 <form onSubmit={handleSubmit}>
                     <div className="container">
@@ -29,10 +29,13 @@ export const Todolist = () => {
                                 value={task} onChange={handleTask}/>
                             </li>
                             {toDos.map((toDo, index) => (
-                                <li key={index} className="list-group-item">
+                                <li key={index} className="list-group-item display-6">
                                     {toDo}
                                 </li>
                             ))}
+                            <li className="list-group-item text-secondary">
+                              <small><i> {toDos.length} item left</i></small>
+                            </li>
                         </ul>
                     </div>
                 </form>
