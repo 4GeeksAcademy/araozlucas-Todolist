@@ -3,18 +3,17 @@ import { useState } from "react";
 
 export const Todolist = () => {
     
-    const toDos = []; 
-
     const [task, setTask] = useState ('');
+    const [toDos,setToDos] = useState([]);
     
     const handleTask = (event) => {setTask(event.target.value)};
     const handleSubmit = (event) => {
-    // Tienes que agregar la tarea al arra de Todos    
+    // Tienes que agregar la tarea al array de toDos    
         event.preventDefault()
+        if (task.trim() === '') return;
+        setToDos([...toDos, task]);
         setTask('');
-        toDos.push(task)
         console.log(toDos);
-        
     };
 
     return (
@@ -29,6 +28,11 @@ export const Todolist = () => {
                                 <input type="text" className="form-control" id="exampleTask" aria-describedby="emailHelp" placeholder="New task" 
                                 value={task} onChange={handleTask}/>
                             </li>
+                            {toDos.map((toDo, index) => (
+                                <li key={index} className="list-group-item">
+                                    {toDo}
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </form>
