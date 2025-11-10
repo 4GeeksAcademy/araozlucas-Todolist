@@ -16,3 +16,12 @@
   font-weight: 300;
   font-style: normal;
 }
+
+.hidden-icon > span {
+    visibility: hidden;
+}
+
+/* Muestra el icono cuando el cursor pase por encima del li */
+.hidden-icon:hover > span {
+    visibility: visible;
+}

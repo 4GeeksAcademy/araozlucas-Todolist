@@ -29,9 +29,13 @@ export const Todolist = () => {
                                 value={task} onChange={handleTask}/>
                             </li>
                             {toDos.map((toDo, index) => (
-                                <li key={index} className="list-group-item display-6">
+                                <li key={index} className="hidden-icon list-group-item d-flex justify-content-between">
                                     {toDo}
+                                    <span>
+                                        <i className="fa-solid fa-trash text-danger"/>
+                                    </span>
                                 </li>
+                               
                             ))}
                             <li className="list-group-item text-secondary">
                               <small><i> {toDos.length} item left</i></small>
