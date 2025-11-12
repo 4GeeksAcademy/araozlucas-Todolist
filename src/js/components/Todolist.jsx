@@ -4,16 +4,24 @@ import { useState } from "react";
 export const Todolist = () => {
     
     const [task, setTask] = useState ('');
-    const [toDos,setToDos] = useState([]);
+    const [toDos, setToDos] = useState ([   {id: 1, todo: 'tarea 1'},
+                                            {id: 2, todo: 'tarea 2'},
+                                            {id: 3, todo: 'tarea 3'} ]);                                 
     
     const handleTask = (event) => {setTask(event.target.value)};
+
+    const handleDeleteTask = (deletedTask) => {
+        setToDos(toDos.filter(item => item.id != deletedTask.id))
+    }
+
     const handleSubmit = (event) => {
     // Tienes que agregar la tarea al array de toDos    
         event.preventDefault()
+        const dataToSend = {id: toDos.length + 1, todo : task};
         if (task.trim() === '') return;
-        setToDos([...toDos, task]);
+        setToDos([...toDos, dataToSend]);
         setTask('');
-        console.log(toDos);
+        console.log(dataToSend);
     };
 
     return (
@@ -27,18 +35,21 @@ export const Todolist = () => {
                                 <label htmlFor="exampleInputTask" className="form-label"></label>
                                 <input type="text" className="form-control" id="exampleTask" aria-describedby="emailHelp" placeholder="New task" 
                                 value={task} onChange={handleTask}/>
-                            </li>
-                            {toDos.map((toDo, index) => (
+                            </li>                            
+                            
+                           {toDos.map((item, index) => {
+                                return (
                                 <li key={index} className="hidden-icon list-group-item d-flex justify-content-between">
-                                    {toDo}
-                                    <span>
-                                        <i className="fa-solid fa-trash text-danger"/>
+                                    {item.todo}
+                                    <span onClick={() => handleDeleteTask(item)}>
+                                        <i className="fa-solid fa-x text-danger"/>
                                     </span>
                                 </li>
-                               
-                            ))}
-                            <li className="list-group-item text-secondary">
-                              <small><i> {toDos.length} item left</i></small>
+                                )
+                            })}
+
+                            <li className="list-group-item bg-light text-secondary">
+                              <small><i> {toDos.length == 0 ? 'None' : toDos.length} pending items</i></small>
                             </li>
                         </ul>
                     </div>
